@@ -5,7 +5,4 @@ describe Movies::Scan do
     Movies::Scan.folder("Broccoli").should eql("Gross!")
   end
 
-  it "anything else is delicious" do
-    Movies::Scan.portray("Not Broccoli").should eql("Delicious!")
-  end
 end

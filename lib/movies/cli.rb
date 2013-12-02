@@ -1,10 +1,24 @@
 require 'thor'
+
+require 'movies'
+
+
 module Movies
+
   class CLI < Thor
 
-    desc "portray ITEM", "Determines if a piece of food is gross or delicious"
-    def hello(name)
-      puts "Hello #{name}"
+    class_option :verbose, :type => :boolean
+
+    desc "scan <folder>", "Scans folder for new movies to index"
+    def scan(folder=nil)
+
+      Movies::Scan::folder(folder)
+
+
+
     end
+
   end
+
 end
+
