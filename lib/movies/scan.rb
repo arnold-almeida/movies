@@ -1,6 +1,11 @@
+require 'thor/group'
+
 module Movies
 
-  class Scan
+  class Scan < Thor::Group
+
+    desc "Scans a folder"
+
 
     def self.folder(path)
 
@@ -10,19 +15,26 @@ module Movies
       files = Dir.glob(folder)
       found = 0
 
+      puts "Searching for files in '#{folder}'"
+
       files.each do |file|
-        isDir = File.directory? file
-        puts Movies::Name::parse(file)
+
+        valid = false;
+
+        if File.directory? file
+          puts  "Is movie dir"
+        else
+          puts "Is movie file..."
+          puts Pathname.new(file).basename
+        end
+
+        puts Movies::Title::parse(file)
         found = found +1
       end
 
       puts "Found : #{found} movie/s"
 
-      # # Find.find(dir) do |f|
-      # #   files << path if path =~ /.*\.pdf$/
-      # # end
 
-      # puts "Searching for files in '#{dir}'"
 
       # Tmdb::Api.key("b1955c9c04f52600c1f17441de3bd496")
       # results = Tmdb::Movie.find("Tristan.and.Isolde[2006]DvDrip[Eng]-aXXo");

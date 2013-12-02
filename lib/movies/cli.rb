@@ -1,5 +1,4 @@
 require 'thor'
-
 require 'movies'
 
 
@@ -11,13 +10,11 @@ module Movies
 
     desc "scan <folder>", "Scans folder for new movies to index"
     def scan(folder=nil)
-
       Movies::Scan::folder(folder)
-
-
-
     end
 
+    # register(class_name, subcommand_alias, usage_list_string, description_string)
+    register(Movies::Clean, "clean", "clean", "Prints some numbers in sequence")
   end
 
 end
