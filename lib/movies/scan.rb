@@ -2,72 +2,85 @@ require 'thor/group'
 
 module Movies
 
-  class Scan < Thor::Group
+class Scan < Thor::Group
 
-    desc "Scans a folder"
+  desc "Scans a folder"
+  def self.folder(path)
 
+    # Hard coded for now
+    folder =  '/Volumes/DOTFILES/Movies/REAL/*';
+    files = []
+    files = Dir.glob(folder)
+    found = 0
 
-    def self.folder(path)
+    puts "Searching for new files in [#{folder}]"
 
-      # Hard coded for now
-      folder =  '/Volumes/DOTFILES/Movies/REAL/*';
-      files = []
-      files = Dir.glob(folder)
-      found = 0
+    files.each do |file|
 
-      puts "Searching for files in '#{folder}'"
+      valid = false;
 
-      files.each do |file|
-
-        valid = false;
-
-        if File.directory? file
-          puts  "Is movie dir"
+      if File.directory? file
+        if Movies::Meta::checkIndex(file) == true
+          puts "Skipping folder..."
+        end
+      else
+        if Movies::Utility::isMovieFile(file)
+          filename = Pathname.new(file).basename
+          puts "[#{filename}] has been converted to a folder"
         else
-          puts "Is movie file..."
-          puts Pathname.new(file).basename
+          filename = Pathname.new(file).basename
+          puts "[#{filename}] is Invalid. Ignoring..."
         end
 
-        puts Movies::Title::parse(file)
-        found = found +1
       end
 
-      puts "Found : #{found} movie/s"
+      puts Movies::Title::parse(file)
+      found = found +1
+    end
+
+    puts "Found : #{found} movie/s"
 
 
 
-      # Tmdb::Api.key("b1955c9c04f52600c1f17441de3bd496")
-      # results = Tmdb::Movie.find("Tristan.and.Isolde[2006]DvDrip[Eng]-aXXo");
+    # Tmdb::Api.key("b1955c9c04f52600c1f17441de3bd496")
+    # results = Tmdb::Movie.find("star wars");
 
-      # rows = []
+    # rows = []
 
-      # results.each do |movie|
+    # results.each do |movie|
 
-      #   directors = []
-      #   starring = []
+    #   directors = []
+    #   starring = []
 
-      #   Tmdb::Movie.crew(movie.id).each do |crew|
-      #     if crew['department'] == 'Directing'
-      #       directors << crew['name']
-      #     end
-      #   end
+    #   Tmdb::Movie.crew(movie.id).each do |crew|
+    #     if crew['department'] == 'Directing'
+    #       directors << crew['name']
+    #     end
+    #   end
 
-      #   Tmdb::Movie.casts(movie.id).first(3).each do |cast|
-      #     starring << cast['name']
-      #   end
+    #   Tmdb::Movie.casts(movie.id).first(3).each do |cast|
+    #     starring << cast['name']
+    #   end
 
-      #   rows << [
-      #     Date.parse(movie.release_date).year,
-      #     movie.title,
-      #     directors.join(', '),
-      #     starring.join(', ')
-      #   ]
+    #   rows << [
+    #     Date.parse(movie.release_date).year,
+    #     movie.title,
+    #     directors.join(', '),
+    #     starring.join(', ')
+    #   ]
 
-      # end
+    # end
 
-      # table = Terminal::Table.new :headings => ['Year', 'Title', 'Directors', 'Starring'], :rows => rows
+    # table = Terminal::Table.new :headings => ['Year', 'Title', 'Directors', 'Starring'], :rows => rows
 
-      # puts table
+    # puts table
+
     end
   end
+
+private
+  def self.foo
+
+  end
+
 end

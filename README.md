@@ -1,6 +1,6 @@
 # Movies
 
-TODO: Write a gem description
+Gem to help tidy your movies collection. Looks up data from TheMovieDatabase
 
 ## Installation
 
@@ -16,9 +16,18 @@ Or install it yourself as:
 
     $ gem install movies
 
+## ToDo
+
+    - create Local SQLLite DB for fast indexes
+    - add .MovieMeta for files that have been processed
+    - Anonymous stats
+
 ## Usage
 
-TODO: Write usage instructions here
+    `movies scan <folder>`
+
+
+    `movies scan <file>`
 
 ## Contributing
 

@@ -27,4 +27,10 @@ Gem::Specification.new do |spec|
 
 
   spec.add_dependency "thor"
+  spec.add_dependency "terminal-table"
+  spec.add_dependency "themoviedb"
+  # spec.add_dependency "active_record"
+  # spec.add_dependency "sqlite3"
+
+
 end

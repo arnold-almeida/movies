@@ -1,7 +1,9 @@
+
 module Movies
 
   class Clean < Thor::Group
-    argument :movie, :type => :string, :desc => "Folder or Movie to fix"
+
+    argument :movie, :type => :string, :desc => "<folder> or <file> to fix"
     desc "Fixes a movie file"
 
     def one
