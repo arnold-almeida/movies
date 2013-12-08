@@ -1,6 +1,11 @@
 # Movies
 
-Gem to help tidy your movies collection. Looks up data from TheMovieDatabase
+Gem to help tidy your movies collection. Looks up data from TheMovieDatabase and then
+organises your collection based on a preferred format.
+
+ eg. [Year] - [Director] - [Title]
+
+ -
 
 ## Installation
 
