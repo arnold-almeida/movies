@@ -1,6 +1,6 @@
 require "movies/version"
 
-#
+# Load utility gems
 require 'themoviedb'
 require 'terminal-table'
 

@@ -4,8 +4,27 @@ module Movies
 
 class Title
 
+  # Attributes to strip
+  @@stripAttrs = [
+    'R5',
+    'XviD-DOSE',
+    'XviD',
+    'READNFO',
+  ]
+
   def self.parse(title)
-    puts title
+
+    title = Pathname.new(title).basename.to_s
+
+    if title.include? "."
+      title = title.split(".").join(" ")
+    end
+
+    @@stripAttrs.each do |pattern|
+      title = title.gsub(pattern, "")
+    end
+
+    return title
   end
 
 private
